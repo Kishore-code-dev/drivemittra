@@ -215,6 +215,8 @@ export function canAccessRoute(role: OrganizationRole, pathname: string): boolea
     clean === '/dashboard/maintenance' ||
     clean === '/dashboard/work-orders' ||
     clean === '/dashboard/inspections' ||
+    clean === '/dashboard/reminders' ||
+    clean === '/dashboard/issues' ||
     clean === '/dashboard/inventory' ||
     clean === '/dashboard/workshops'
   ) {

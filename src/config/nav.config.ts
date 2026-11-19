@@ -10,7 +10,7 @@ type Icon = ComponentType<{ className?: string }>
 
 export interface NavLeaf {
   to: string
-  labelKey: string // i18n key
+  labelKey?: string // i18n key (omit when `label` is given)
   /** Optional plain label that overrides the translated one (avoids group/child name clashes) */
   label?: string
   icon?: Icon
@@ -46,6 +46,8 @@ export const MAIN_NAV: NavEntry[] = [
     id: 'maintenance', label: 'Maintenance', icon: Wrench,
     children: [
       { to: '/dashboard/maintenance', labelKey: 'nav.maintenance', label: 'Predictive Health', badge: 'maintenance' },
+      { to: '/dashboard/reminders', label: 'Reminders' },
+      { to: '/dashboard/issues', label: 'Issues & Faults' },
       { to: '/dashboard/inspections', labelKey: 'nav.inspections' },
       { to: '/dashboard/work-orders', labelKey: 'nav.work_orders', badge: 'workOrders' },
       { to: '/dashboard/workshops', labelKey: 'nav.workshops' },
