@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import {
-  AlertTriangle, Cpu, FileSpreadsheet,
+  AlertTriangle, MapPinned, Cpu, FileSpreadsheet,
   Layers, LayoutDashboard, MapPin, Package,
   Wrench, Wallet, Settings as SettingsIcon, Briefcase,
 } from 'lucide-react'
@@ -53,6 +53,7 @@ export const MAIN_NAV: NavEntry[] = [
       { to: '/dashboard/workshops', labelKey: 'nav.workshops' },
     ],
   },
+  { id: 'places', to: '/dashboard/places', label: 'Places', icon: MapPinned },
   { id: 'inventory', to: '/dashboard/inventory', labelKey: 'nav.inventory', icon: Package },
   {
     id: 'intelligence', label: 'Intelligence', icon: Cpu,

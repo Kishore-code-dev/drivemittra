@@ -742,3 +742,16 @@ export interface ReportHistoryItem {
   format: 'CSV' | 'PDF' | 'XLSX'
   rowCount: number
 }
+
+export type PlaceKind = 'depot' | 'fuel_station' | 'service_center' | 'customer' | 'parking' | 'other'
+
+export interface PlaceRecord {
+  id: string
+  organizationId: string
+  name: string
+  kind: PlaceKind
+  address: string
+  city: string
+  location?: LatLng
+  notes?: string
+}

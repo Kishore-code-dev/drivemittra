@@ -28,6 +28,7 @@ import type {
   RiskAssessmentItem,
   ServiceScheduleReminder,
   SmallIssueLog,
+  PlaceRecord,
   SubscriptionPlanId,
   SupplierRecord,
   Trip,
@@ -138,6 +139,7 @@ export interface FleetContextValue {
   inspections: VehicleInspection[]
   serviceSchedules: ServiceScheduleReminder[]
   smallIssues: SmallIssueLog[]
+  places: PlaceRecord[]
   workOrders: WorkOrder[]
   partsInventory: PartInventoryItem[]
   suppliers: SupplierRecord[]
@@ -204,6 +206,8 @@ export interface FleetContextValue {
   addServiceSchedule: (payload: Omit<ServiceScheduleReminder, 'id' | 'organizationId'>) => ServiceScheduleReminder
   completeServiceSchedule: (scheduleId: string) => void
   addSmallIssue: (payload: Omit<SmallIssueLog, 'id' | 'organizationId' | 'reportedAt' | 'reportedBy' | 'status'>) => SmallIssueLog
+  addPlace: (payload: Omit<PlaceRecord, 'id' | 'organizationId'>) => PlaceRecord
+  removePlace: (placeId: string) => void
   convertIssueToWorkOrder: (issueId: string, workshopId?: string, laborCostInr?: number) => WorkOrder | null
   createWorkOrder: (payload: {
     vehicleId: string
@@ -326,6 +330,7 @@ export function FleetProvider({ children }: { children: React.ReactNode }) {
         inspections: payload.data.inspections ?? [],
         serviceSchedules: payload.data.serviceSchedules ?? [],
         smallIssues: payload.data.smallIssues ?? [],
+        places: payload.data.places ?? [],
         workOrders: payload.data.workOrders ?? [],
         partsInventory: payload.data.partsInventory ?? [],
         suppliers: payload.data.suppliers ?? [],
@@ -384,6 +389,7 @@ export function FleetProvider({ children }: { children: React.ReactNode }) {
           inspections: nextDataset.inspections.filter((i) => i.organizationId === orgId),
           serviceSchedules: nextDataset.serviceSchedules.filter((s) => s.organizationId === orgId),
           smallIssues: nextDataset.smallIssues.filter((s) => s.organizationId === orgId),
+          places: (nextDataset.places ?? []).filter((pl) => pl.organizationId === orgId),
           workOrders: nextDataset.workOrders.filter((w) => w.organizationId === orgId),
           partsInventory: nextDataset.partsInventory.filter((p) => p.organizationId === orgId),
           suppliers: nextDataset.suppliers.filter((s) => s.organizationId === orgId),
@@ -581,6 +587,10 @@ export function FleetProvider({ children }: { children: React.ReactNode }) {
   const serviceSchedules = useMemo(
     () => dataset.serviceSchedules.filter((s) => s.organizationId === activeOrganization.id),
     [dataset.serviceSchedules, activeOrganization.id],
+  )
+  const places = useMemo(
+    () => (dataset.places ?? []).filter((pl) => pl.organizationId === activeOrganization.id),
+    [dataset.places, activeOrganization.id],
   )
   const smallIssues = useMemo(
     () => dataset.smallIssues.filter((s) => s.organizationId === activeOrganization.id),
@@ -1577,6 +1587,26 @@ export function FleetProvider({ children }: { children: React.ReactNode }) {
     return wo
   }
 
+  const addPlace = (payload: Omit<PlaceRecord, 'id' | 'organizationId'>): PlaceRecord => {
+    assertRolePermission(activeRole, 'update_org_settings')
+    const item: PlaceRecord = { ...payload, id: `pl-${Date.now()}`, organizationId: activeOrganization.id }
+    commitDataset((prev) => ({
+      ...prev,
+      places: [item, ...(prev.places ?? [])],
+      auditLogs: appendAudit(prev.auditLogs, 'ADDED_PLACE', 'place', item.id, `Added place ${item.name}`),
+    }))
+    return item
+  }
+
+  const removePlace = (placeId: string) => {
+    assertRolePermission(activeRole, 'update_org_settings')
+    commitDataset((prev) => ({
+      ...prev,
+      places: (prev.places ?? []).filter((pl) => !(pl.id === placeId && pl.organizationId === activeOrganization.id)),
+      auditLogs: appendAudit(prev.auditLogs, 'REMOVED_PLACE', 'place', placeId, 'Removed place'),
+    }))
+  }
+
   const convertIssueToWorkOrder = (issueId: string, workshopId?: string, laborCostInr = 2500): WorkOrder | null => {
     assertRolePermission(activeRole, 'manage_work_orders')
     const issue = smallIssues.find((i) => i.id === issueId)
@@ -2174,6 +2204,7 @@ export function FleetProvider({ children }: { children: React.ReactNode }) {
     inspections,
     serviceSchedules,
     smallIssues,
+    places,
     workOrders,
     partsInventory,
     suppliers,
@@ -2219,6 +2250,8 @@ export function FleetProvider({ children }: { children: React.ReactNode }) {
     submitVehicleInspection,
     addServiceSchedule,
     completeServiceSchedule,
+    addPlace,
+    removePlace,
     addSmallIssue,
     convertIssueToWorkOrder,
     createWorkOrder,

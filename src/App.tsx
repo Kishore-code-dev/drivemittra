@@ -61,6 +61,7 @@ const AdminConsole = lazyWithRetry(() => import('./pages/AdminConsole'))
 const Settings = lazyWithRetry(() => import('./pages/Settings'))
 const Reminders = lazyWithRetry(() => import('./pages/Reminders'))
 const Issues = lazyWithRetry(() => import('./pages/Issues'))
+const Places = lazyWithRetry(() => import('./pages/Places'))
 const Subscription = lazyWithRetry(() => import('./pages/Subscription'))
 
 class RouteErrorBoundary extends Component<
@@ -223,6 +224,7 @@ export function AppRoutes() {
             <Route path="maintenance" element={<RoleProtectedRoute><Maintenance /></RoleProtectedRoute>} />
             <Route path="reminders" element={<RoleProtectedRoute><Reminders /></RoleProtectedRoute>} />
             <Route path="issues" element={<RoleProtectedRoute><Issues /></RoleProtectedRoute>} />
+            <Route path="places" element={<RoleProtectedRoute><Places /></RoleProtectedRoute>} />
             <Route path="inspections" element={<RoleProtectedRoute><Inspections /></RoleProtectedRoute>} />
             <Route path="work-orders" element={<RoleProtectedRoute><WorkOrders /></RoleProtectedRoute>} />
             <Route path="inventory" element={<RoleProtectedRoute><Inventory /></RoleProtectedRoute>} />

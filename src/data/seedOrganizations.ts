@@ -19,6 +19,7 @@ import type {
   ReportHistoryItem,
   ServiceScheduleReminder,
   SmallIssueLog,
+  PlaceRecord,
   SubscriptionPlanId,
   SupplierRecord,
   Trip,
@@ -269,6 +270,7 @@ export interface EnvironmentDataset {
   inspections: VehicleInspection[]
   serviceSchedules: ServiceScheduleReminder[]
   smallIssues: SmallIssueLog[]
+  places: PlaceRecord[]
   workOrders: WorkOrder[]
   partsInventory: PartInventoryItem[]
   suppliers: SupplierRecord[]
@@ -1901,6 +1903,12 @@ export function buildSeedDataset(_env?: OperatingEnvironment, referenceNowMs: nu
     },
   ]
 
+  const places: PlaceRecord[] = [
+    { id: 'pl-k1', organizationId: kaveriOrgId, name: 'Chennai Main Depot', kind: 'depot', address: 'Ambattur Industrial Estate', city: 'Chennai', location: { lat: 13.0985, lng: 80.1622 }, notes: 'Primary parking and overnight halt' },
+    { id: 'pl-k2', organizationId: kaveriOrgId, name: 'NH44 Fuel Stop', kind: 'fuel_station', address: 'NH44, Krishnagiri', city: 'Krishnagiri', location: { lat: 12.5266, lng: 78.2139 }, notes: 'Bulk diesel account' },
+    { id: 'pl-k3', organizationId: kaveriOrgId, name: 'Madurai Transshipment Yard', kind: 'parking', address: 'Thirumangalam Road', city: 'Madurai', location: { lat: 9.9252, lng: 78.1198 } },
+  ]
+
   const serviceSchedules: ServiceScheduleReminder[] = [
     {
       id: 'sch-k1',
@@ -2760,6 +2768,7 @@ export function buildSeedDataset(_env?: OperatingEnvironment, referenceNowMs: nu
     inspections,
     serviceSchedules,
     smallIssues,
+    places,
     workOrders,
     partsInventory,
     suppliers,

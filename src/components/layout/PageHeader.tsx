@@ -11,7 +11,7 @@ function useCrumbs() {
   for (const e of MAIN_NAV) {
     const leaf = e.children?.find((c) => match(c.to))
     if (leaf) return [{ label: e.label ?? '' }, { label: leaf.label ?? t(leaf.labelKey ?? ''), to: leaf.to }]
-    if (e.to && e.to !== '/dashboard' && match(e.to)) return [{ label: t(e.labelKey ?? ''), to: e.to }]
+    if (e.to && e.to !== '/dashboard' && match(e.to)) return [{ label: e.label ?? t(e.labelKey ?? ''), to: e.to }]
   }
   return []
 }
