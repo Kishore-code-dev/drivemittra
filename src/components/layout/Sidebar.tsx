@@ -110,7 +110,7 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
   const renderLeaf = (leaf: NavLeaf | NavEntry, opts: { child?: boolean } = {}) => {
     const to = leaf.to as string
     const Icon = leaf.icon
-    const label = t((leaf as NavLeaf).labelKey ?? '')
+    const label = (leaf as NavLeaf).label ?? t((leaf as NavLeaf).labelKey ?? '')
     const badge = (leaf as NavLeaf).badge ? badges[(leaf as NavLeaf).badge as BadgeKey] : 0
     return (
       <NavLink

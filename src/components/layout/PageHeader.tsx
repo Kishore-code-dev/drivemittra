@@ -10,7 +10,7 @@ function useCrumbs() {
   const match = (to: string) => pathname === to || pathname.startsWith(`${to}/`)
   for (const e of MAIN_NAV) {
     const leaf = e.children?.find((c) => match(c.to))
-    if (leaf) return [{ label: e.label ?? '' }, { label: t(leaf.labelKey), to: leaf.to }]
+    if (leaf) return [{ label: e.label ?? '' }, { label: leaf.label ?? t(leaf.labelKey), to: leaf.to }]
     if (e.to && e.to !== '/dashboard' && match(e.to)) return [{ label: t(e.labelKey ?? ''), to: e.to }]
   }
   return []
