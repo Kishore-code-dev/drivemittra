@@ -26,6 +26,7 @@ import {
   SeverityText,
 } from '../components/ui/EnterprisePrimitives'
 import type { AIPrediction, ComponentCategory, FiveAreaHealthCategory } from '../types/fleet'
+import PageHeader from '../components/layout/PageHeader'
 
 const FIVE_AREAS: Array<{
   area: FiveAreaHealthCategory
@@ -250,13 +251,7 @@ export default function Maintenance() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">5-Area Predictive Maintenance & Workshop</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Model {INTELLIGENCE_MODEL_VERSION} · Fuel, Engine, Tyre, Driver (safety/compliance), Vehicle Health
-          </p>
-        </div>
+      <PageHeader title="5-Area Predictive Maintenance & Workshop" subtitle={<>{activeOrganization.name} · Model {INTELLIGENCE_MODEL_VERSION} · Fuel, Engine, Tyre, Driver (safety/compliance), Vehicle Health</>}>
         <div className="flex flex-wrap items-center gap-2.5">
           {canResolve && (
             <button
@@ -290,7 +285,7 @@ export default function Maintenance() {
             </button>
           )}
         </div>
-      </div>
+      </PageHeader>
 
       {/* Scope Disclosure */}
       <div className="lavender-surface p-4 flex items-start gap-3 text-xs text-[#625346]">

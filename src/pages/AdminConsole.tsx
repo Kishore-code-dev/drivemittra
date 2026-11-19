@@ -8,6 +8,7 @@ import { SUBSCRIPTION_PLANS } from '../data/seedOrganizations'
 import { canPerformAction } from '../utils/rbac'
 import { EnterpriseModal, formatDateTime, SeverityText } from '../components/ui/EnterprisePrimitives'
 import type { OrganizationRole } from '../types/fleet'
+import PageHeader from '../components/layout/PageHeader'
 
 const ADMIN_TABS = [
   'Organizations',
@@ -99,13 +100,7 @@ export default function AdminConsole() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Administration Console</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Owner Production Governance, RBAC & Audit Controls
-          </p>
-        </div>
+      <PageHeader title="Administration Console" subtitle={<>{activeOrganization.name} · Owner Production Governance, RBAC & Audit Controls</>}>
         {activeRole === 'platform_admin' && (
           <button
             type="button"
@@ -116,7 +111,7 @@ export default function AdminConsole() {
             Open Super Admin Governance
           </button>
         )}
-      </div>
+      </PageHeader>
 
       {issuedCreds && (
         <div className="enterprise-card p-4 border-l-4 border-l-[#6E5696] bg-[#EEE8F7]/60 flex flex-wrap items-center justify-between gap-3 text-xs">

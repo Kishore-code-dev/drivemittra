@@ -5,6 +5,7 @@ import { toast } from 'sonner'
 import { useFleet } from '../hooks/useFleet'
 import { canPerformAction } from '../utils/rbac'
 import { EmptySectionState, formatDateTime, SeverityText } from '../components/ui/EnterprisePrimitives'
+import PageHeader from '../components/layout/PageHeader'
 
 export default function AlertsPage() {
   const navigate = useNavigate()
@@ -33,13 +34,7 @@ export default function AlertsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Operational Alerts</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Real-time maintenance, telemetry, driver, and fuel exceptions
-          </p>
-        </div>
+      <PageHeader title="Operational Alerts" subtitle={<>{activeOrganization.name} · Real-time maintenance, telemetry, driver, and fuel exceptions</>}>
         {canAcknowledge && (
           <button
             type="button"
@@ -57,7 +52,7 @@ export default function AlertsPage() {
             Mark All Read
           </button>
         )}
-      </div>
+      </PageHeader>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="p-1.5 flex items-center gap-1 w-fit bg-[#EEE8F7] border border-[#DDD3ED] rounded-[10px]">

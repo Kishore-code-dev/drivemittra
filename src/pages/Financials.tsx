@@ -11,6 +11,7 @@ import {
   SeverityText,
 } from '../components/ui/EnterprisePrimitives'
 import type { FinancialInvoice, PaymentRecord } from '../types/fleet'
+import PageHeader from '../components/layout/PageHeader'
 
 export default function Financials() {
   const {
@@ -126,13 +127,7 @@ export default function Financials() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Financial Intelligence & Ledger</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Period {reportingPeriod.toUpperCase()} · Recorded / Verified / Paid separation in INR (₹)
-          </p>
-        </div>
+      <PageHeader title="Financial Intelligence & Ledger" subtitle={<>{activeOrganization.name} · Period {reportingPeriod.toUpperCase()} · Recorded / Verified / Paid separation in INR (₹)</>}>
         <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -153,7 +148,7 @@ export default function Financials() {
             </button>
           )}
         </div>
-      </div>
+      </PageHeader>
 
       {showMethodology && (
         <div className="lavender-surface p-5 space-y-2 text-xs text-[#625346]">

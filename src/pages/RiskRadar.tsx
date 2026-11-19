@@ -4,6 +4,7 @@ import { ArrowRight, ShieldAlert } from 'lucide-react'
 import { useFleet } from '../hooks/useFleet'
 import { EmptySectionState, formatDateTime, SeverityText } from '../components/ui/EnterprisePrimitives'
 import type { RiskCategory, RiskSeverity } from '../types/fleet'
+import PageHeader from '../components/layout/PageHeader'
 
 const RISK_CATEGORY_OPTIONS: ReadonlyArray<{ id: 'all' | RiskCategory; label: string }> = [
   { id: 'all', label: 'All 10 Categories' },
@@ -55,14 +56,8 @@ export default function RiskRadar() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">10-Category Fleet Risk Radar</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Unified cross-system risk prioritization across all 10 fleet dimensions with insufficient-data safeguards
-          </p>
-        </div>
-      </div>
+      <PageHeader title="10-Category Fleet Risk Radar" subtitle={<>{activeOrganization.name} · Unified cross-system risk prioritization across all 10 fleet dimensions with insufficient-data safeguards</>}>
+      </PageHeader>
 
       {/* 4 Severity Buckets */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

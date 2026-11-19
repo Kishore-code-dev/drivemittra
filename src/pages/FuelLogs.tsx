@@ -11,6 +11,7 @@ import {
   SeverityText,
 } from '../components/ui/EnterprisePrimitives'
 import type { FuelTransaction } from '../types/fleet'
+import PageHeader from '../components/layout/PageHeader'
 
 export default function FuelLogs() {
   const {
@@ -106,13 +107,7 @@ export default function FuelLogs() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Fuel & Energy Intelligence</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Distinguishes manual driver entries from automated feeds with duplicate & variance review
-          </p>
-        </div>
+      <PageHeader title="Fuel & Energy Intelligence" subtitle={<>{activeOrganization.name} · Distinguishes manual driver entries from automated feeds with duplicate & variance review</>}>
         {canLogFuel && (
           <button
             type="button"
@@ -131,7 +126,7 @@ export default function FuelLogs() {
             Log Fuel / Charging
           </button>
         )}
-      </div>
+      </PageHeader>
 
       {/* KPI Strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

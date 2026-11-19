@@ -10,6 +10,7 @@ import {
   formatDateTime,
   SeverityText,
 } from '../components/ui/EnterprisePrimitives'
+import PageHeader from '../components/layout/PageHeader'
 
 export default function Inspections() {
   const navigate = useNavigate()
@@ -109,13 +110,7 @@ export default function Inspections() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Vehicle Inspections & Defect Queue</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Owner-supervised pre-trip & workshop roadworthiness checks
-          </p>
-        </div>
+      <PageHeader title="Vehicle Inspections & Defect Queue" subtitle={<>{activeOrganization.name} · Owner-supervised pre-trip & workshop roadworthiness checks</>}>
         {canInspect && (
           <button
             type="button"
@@ -126,7 +121,7 @@ export default function Inspections() {
             Log Inspection
           </button>
         )}
-      </div>
+      </PageHeader>
 
       {/* Summary Strip */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -6,6 +6,7 @@ import { useFleet } from '../hooks/useFleet'
 import { canPerformAction } from '../utils/rbac'
 import { EnterpriseModal, formatInr } from '../components/ui/EnterprisePrimitives'
 import type { FiveAreaHealthCategory } from '../types/fleet'
+import PageHeader from '../components/layout/PageHeader'
 
 const SPECIALTIES: FiveAreaHealthCategory[] = [
   'Fuel Health',
@@ -58,20 +59,14 @@ export default function Workshops() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Workshops & External Service Vendors</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Authorized service centers, SLA turnaround benchmarks & linked Work Orders
-          </p>
-        </div>
+      <PageHeader title="Workshops & External Service Vendors" subtitle={<>{activeOrganization.name} · Authorized service centers, SLA turnaround benchmarks & linked Work Orders</>}>
         {canManage && (
           <button type="button" onClick={() => setAddOpen(true)} className="btn-primary text-xs">
             <Plus className="w-4 h-4" />
             Register Workshop
           </button>
         )}
-      </div>
+      </PageHeader>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {workshops.map((ws) => {

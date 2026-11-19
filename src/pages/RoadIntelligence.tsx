@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { CloudRain, Compass, RefreshCw, Thermometer, Wind } from 'lucide-react'
 import { useFleet } from '../hooks/useFleet'
 import { formatDateTime, SeverityText } from '../components/ui/EnterprisePrimitives'
+import PageHeader from '../components/layout/PageHeader'
 
 interface LiveCorridorWeather {
   corridorId: string
@@ -103,13 +104,7 @@ export default function RoadIntelligence() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="dm-page-title">Corridor Stress & Climate Intelligence</h1>
-          <p className="text-sm text-[#958777] mt-1">
-            {activeOrganization.name} · Regional road stress and live climate multipliers applied in 5-area predictive wear models
-          </p>
-        </div>
+      <PageHeader title="Corridor Stress & Climate Intelligence" subtitle={<>{activeOrganization.name} · Regional road stress and live climate multipliers applied in 5-area predictive wear models</>}>
 
         <button
           type="button"
@@ -120,7 +115,7 @@ export default function RoadIntelligence() {
           <RefreshCw className={`w-3.5 h-3.5 ${liveFeed.loading ? 'animate-spin' : ''}`} />
           Refresh Climate Feed
         </button>
-      </div>
+      </PageHeader>
 
       <div
         className={`rounded-[12px] border px-4 py-3 text-xs flex flex-wrap items-center justify-between gap-2 ${
