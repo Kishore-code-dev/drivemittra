@@ -383,62 +383,129 @@ export default function Landing() {
           <div className="max-w-2xl">
             <p className="text-xs font-semibold text-[#6E5696] uppercase tracking-wider">Transparent Licensing</p>
             <h2 className="dm-section-title text-3xl mt-2">
-              Predictable pricing per active fleet organization
+              Simple, Predictable Pricing for Indian Fleet Owners
             </h2>
             <p className="text-[#958777] mt-2 text-sm">
-              Provisioned centrally by platform onboarding with isolated tenant workspaces.
+              Start with ₹3,500/month or save ₹6,000 annually. All plans include full Fleet Owner access.
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-            {SUBSCRIPTION_PLANS.map((plan) => (
-              <div
-                key={plan.id}
-                className={`rounded-xl p-6 flex flex-col justify-between border shadow-card ${
-                  plan.id === 'growth'
-                    ? 'bg-[#FFFFFF] text-[#625346] border-2 border-[#E8C65A]'
-                    : 'bg-[#FAFAFA] text-[#625346] border-[#E5E5E5]'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-lg font-bold text-[#625346]">{plan.name}</h3>
-                    {plan.id === 'growth' && (
-                      <span className="text-xs font-semibold text-[#625346] bg-[#E8C65A]/45 border border-[#D8B442] px-2.5 py-0.5 rounded-[8px]">
-                        Recommended
-                      </span>
-                    )}
+          <div className="mt-10 space-y-6">
+            {/* Monthly Plan - Primary Callout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              <div className="lg:col-span-7">
+                <div className="bg-[#FFFFFF] border-2 border-[#E8C65A] rounded-2xl p-8 shadow-lg">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-[#625346] mb-2">Go Premium - Monthly Plan</h3>
+                      <p className="text-base text-[#625346]/80">Full Fleet Owner access • Perfect for small operations getting started</p>
+                    </div>
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-bold text-[#625346] bg-[#E8C65A]/45 border border-[#D8B442]">
+                      ✓ Popular Starter Plan
+                    </span>
                   </div>
-                  <p className="text-xs mt-1.5 text-[#958777]">{plan.tagline}</p>
-                  <div className="mt-5 pb-5 border-b border-[#E5E5E5]">
-                    {plan.monthlyInr !== null ? (
-                      <p className="text-3xl font-bold tabular-nums text-[#625346]">
-                        {formatInr(plan.monthlyInr)}
-                        <span className="text-xs font-normal ml-1 text-[#958777]">/ month</span>
-                      </p>
-                    ) : (
-                      <p className="text-2xl font-bold text-[#625346]">Custom Contract</p>
-                    )}
+                  
+                  <div className="text-center py-6 mb-6 bg-[#FAFAFA] rounded-xl border border-[#E5E5E5]">
+                    <div className="text-4xl font-bold text-[#625346] mb-1">₹3,500</div>
+                    <div className="text-lg text-[#958777] font-medium">/ month</div>
+                    <p className="text-xs text-[#4D6E4A] mt-2">Cancel anytime • No hidden fees</p>
                   </div>
-                  <ul className="mt-5 space-y-2.5 text-sm">
-                    {plan.features.map((feat) => (
-                      <li key={feat} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 mt-0.5 shrink-0 text-[#4D6E4A]" />
-                        <span className="text-[#625346]">{feat}</span>
-                      </li>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                    <div className="text-center p-3 bg-[#EEE8F7] rounded-lg">
+                      <p className="text-xs text-[#958777]">Up to</p>
+                      <p className="text-lg font-bold text-[#625346]">15 Vehicles</p>
+                    </div>
+                    <div className="text-center p-3 bg-[#EEE8F7] rounded-lg">
+                      <p className="text-xs text-[#958777]">Up to</p>
+                      <p className="text-lg font-bold text-[#625346]">25 Drivers</p>
+                    </div>
+                    <div className="text-center p-3 bg-[#EEE8F7] rounded-lg col-span-2 md:col-span-1">
+                      <p className="text-xs text-[#958777]">Live Support</p>
+                      <p className="text-xs text-[#625346] font-medium">Included</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {SUBSCRIPTION_PLANS.find(p => p.id === 'monthly_basic')?.features.slice(0, 5).map((feat) => (
+                      <div key={feat} className="flex items-start gap-3">
+                        <Check className="w-4 h-4 text-[#789A75] shrink-0 mt-0.5" />
+                        <span className="text-sm text-[#625346]">{feat}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={handleBegin}
-                  className={`mt-8 w-full ${plan.id === 'growth' ? 'btn-primary' : 'btn-secondary'}`}
-                >
-                  {isAuthenticated ? 'Open Workspace' : 'Login to Workspace'}
-                </button>
               </div>
-            ))}
+              
+              <div className="lg:col-span-5">
+                <div className="bg-[#FFFFFF] border-2 border-[#E8C65A] rounded-2xl p-8 text-center">
+                  <div className="mb-6">
+                    <p className="text-xs font-semibold text-[#6E5696] uppercase tracking-wider mb-2">
+                      Save ₹6,000 Instantly!
+                    </p>
+                    <h3 className="text-2xl font-bold text-[#625346] mb-2">Annual Plan</h3>
+                    <p className="text-base text-[#625346]/80 mb-4">Pay once, save 14.3%</p>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <div className="text-4xl font-bold text-[#625346] mb-2">₹36,000</div>
+                    <div className="text-lg text-[#958777] font-medium">/ year</div>
+                    <div className="text-xs text-[#4D6E4A] mt-2 font-semibold">
+                      ✓ Save ₹6,000 vs 12 monthly payments
+                    </div>
+                    <div className="text-xs text-[#789A75] mt-1">
+                      Same features • One-year validity
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-[#E5E5E5] text-xs text-[#958777]">
+                    <p className="font-semibold text-[#625346] mb-2">⚡ Limited Time Offer: Lock in this savings</p>
+                    <p>Contact DriveMitra to activate your annual subscription</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Other Plans */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {SUBSCRIPTION_PLANS.filter(p => p.id !== 'monthly_basic' && p.id !== 'annual_basic').map((plan) => (
+                <div
+                  key={plan.id}
+                  className="bg-[#FFFFFF] border border-[#E5E5E5] rounded-xl p-6 flex flex-col h-full shadow-card"
+                >
+                  <div>
+                    <h3 className="text-lg font-bold text-[#625346] mb-2">{plan.name}</h3>
+                    <p className="text-xs text-[#625346]/80 mb-4">{plan.tagline}</p>
+                    <div className="mb-4">
+                      {plan.monthlyInr !== null ? (
+                        <>
+                          <p className="text-2xl font-bold text-[#625346]">
+                            {formatInr(plan.monthlyInr)}<span className="text-xs font-normal ml-1 text-[#958777]">/ month</span>
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-xl font-bold text-[#625346]">Custom Contract</p>
+                      )}
+                    </div>
+                    <ul className="space-y-2 text-xs text-[#625346] mb-4">
+                      {plan.features.slice(0, 4).map((feat) => (
+                        <li key={feat} className="flex items-start gap-2">
+                          <Check className="w-3 h-3 text-[#789A75] shrink-0 mt-0.5" />
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleBegin}
+                    className="mt-auto w-full btn-secondary text-xs"
+                  >
+                    {isAuthenticated ? 'Open Workspace' : 'Login to Workspace'}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
